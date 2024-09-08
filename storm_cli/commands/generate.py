@@ -1,4 +1,3 @@
-# storm_cli/commands/generate.py
 import typer
 
 app = typer.Typer()
