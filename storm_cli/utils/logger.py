@@ -5,7 +5,7 @@ from datetime import datetime
 class StormStyleFormatter(logging.Formatter):
     def format(self, record):
         # Custom format to resemble NestJS
-        log_format = "[Storm] {pid}   - {timestamp}   [{context}] {message}"
+        log_format = "[Storm] {pid} - {timestamp} [{context}] {message}"
         log_message = log_format.format(
             pid=record.process,
             timestamp=datetime.now().strftime("%m/%d/%Y, %I:%M:%S %p"),
