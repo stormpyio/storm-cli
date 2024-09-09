@@ -5,6 +5,7 @@ from storm_cli.utils.logger import setup_logger
 app = typer.Typer()
 logger = setup_logger("NewCommand")
 
+
 @app.command()
 def new(app_name: str):
     """
@@ -46,6 +47,7 @@ def new(app_name: str):
         logger.info(f"Created file: {filepath}")
 
     logger.info(f"Successfully created Storm application '{app_name}'.")
+
 
 if __name__ == "__main__":
     app()

@@ -5,6 +5,7 @@ from storm_cli.utils.logger import setup_logger
 app = typer.Typer()
 logger = setup_logger("StartCommand")
 
+
 @app.command()
 def start(app: str = typer.Argument(None, help="The application to run")):
     """
@@ -23,6 +24,7 @@ def start(app: str = typer.Argument(None, help="The application to run")):
     except subprocess.CalledProcessError as e:
         logger.error(f"Error starting the application: {e}")
         raise typer.Exit(code=1)
+
 
 if __name__ == "__main__":
     app()

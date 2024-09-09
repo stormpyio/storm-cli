@@ -4,6 +4,7 @@ app = typer.Typer()
 
 config_store = {}  # Placeholder for configuration storage
 
+
 @app.command()
 def set(key: str, value: str):
     """
@@ -16,6 +17,7 @@ def set(key: str, value: str):
     config_store[key] = value
     typer.echo(f"Configuration set: {key} = {value}")
 
+
 @app.command()
 def get(key: str):
     """
@@ -26,6 +28,7 @@ def get(key: str):
     """
     value = config_store.get(key, "Not set")
     typer.echo(f"Configuration: {key} = {value}")
+
 
 if __name__ == "__main__":
     app()

@@ -13,6 +13,7 @@ SCHEMATICS = {
     "service": "service_template.txt",
 }
 
+
 @app.command("module")
 def module(name: str, path: str = "."):
     """
@@ -23,6 +24,7 @@ def module(name: str, path: str = "."):
     :return: None
     """
     generate("module", name, path)
+
 
 @app.command("controller")
 def generate_controller(name: str, path: str = "."):
@@ -35,6 +37,7 @@ def generate_controller(name: str, path: str = "."):
     """
     generate("controller", name, path)
 
+
 @app.command("service")
 def generate_service(name: str, path: str = "."):
     """
@@ -46,6 +49,7 @@ def generate_service(name: str, path: str = "."):
     """
     generate("service", name, path)
 
+
 def generate(schematic: str, name: str, path: str):
     """
     General function to generate elements using Jinja2 templates.
@@ -56,25 +60,32 @@ def generate(schematic: str, name: str, path: str):
     :return: None
     """
     if schematic not in SCHEMATICS:
-        logger.error(f"Schematic '{schematic}' is not recognized. Available schematics: {list(SCHEMATICS.keys())}")
+        logger.error(
+            f"Schematic '{schematic}' is not recognized. Available schematics: {list(SCHEMATICS.keys())}"
+        )
         raise typer.Exit(code=1)
 
     template_file = SCHEMATICS[schematic]
     template_path = os.path.join("storm_cli", "templates", template_file)
 
-    logger.info(f"Generating {schematic} named '{name}' using template '{template_file}'.")
+    logger.info(
+        f"Generating {schematic} named '{name}' using template '{template_file}'."
+    )
 
     # Load and populate the template using Jinja
     try:
         content = load_template(template_path, name=name)
         output_filename = f"{name.lower()}.py"
-        file_path = os.path.join(path, output_filename)  # Define the output path and file name
+        file_path = os.path.join(
+            path, output_filename
+        )  # Define the output path and file name
         create_file(file_path, content)
         logger.info(f"Generated {schematic} at {file_path}.")
     except Exception as e:
         typer.echo(f"Error generating {schematic}: {e}")
         logger.error(f"Error generating {schematic}: {e}")
         raise typer.Exit(code=1)
+
 
 if __name__ == "__main__":
     app()

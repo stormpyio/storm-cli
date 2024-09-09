@@ -4,6 +4,7 @@ from storm_cli.utils.logger import setup_logger
 app = typer.Typer()
 logger = setup_logger("InfoCommand")
 
+
 @app.command()
 def info():
     """
@@ -16,4 +17,3 @@ def info():
     typer.echo("Project Name: Example Storm Project")
     typer.echo("Version: 1.0.0")
     typer.echo("Description: This is an example Storm project.")
-

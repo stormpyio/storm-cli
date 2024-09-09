@@ -45,7 +45,7 @@ def load_template(template_path: str, **kwargs) -> str:
     env = Environment(
         loader=FileSystemLoader(template_dir),
         # Adjust autoescape as needed
-        autoescape=select_autoescape(['html', 'xml'])
+        autoescape=select_autoescape(["html", "xml"]),
     )
 
     # Load and render the template
