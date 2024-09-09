@@ -15,3 +15,13 @@ def create_file(path: str, content: str):
     with open(path, "w") as file:
         file.write(content)
     print(f"File created at: {path}")
+
+def create_directory(path: str):
+    """
+    Create a directory at the given path.
+
+    :param path: The path where the directory will be created.
+    :return: None
+    """
+    os.makedirs(path, exist_ok=True)
+    print(f"Directory created at: {path}")
