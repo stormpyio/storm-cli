@@ -3,7 +3,8 @@ from storm_cli.utils.file_manager import create_file, create_directory
 from storm_cli.utils.logger import setup_logger
 
 app = typer.Typer()
-logger = setup_logger("NewCommand")
+logger = setup_logger("New")
+
 
 @app.command()
 def new(app_name: str):
@@ -46,6 +47,7 @@ def new(app_name: str):
         logger.info(f"Created file: {filepath}")
 
     logger.info(f"Successfully created Storm application '{app_name}'.")
+
 
 if __name__ == "__main__":
     app()

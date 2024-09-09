@@ -1,6 +1,7 @@
 import logging
 from datetime import datetime
 
+
 # Define a custom logging formatter
 class StormStyleFormatter(logging.Formatter):
     def format(self, record):
@@ -10,9 +11,10 @@ class StormStyleFormatter(logging.Formatter):
             pid=record.process,
             timestamp=datetime.now().strftime("%m/%d/%Y, %I:%M:%S %p"),
             context=record.name,
-            message=record.getMessage()
+            message=record.getMessage(),
         )
         return log_message
+
 
 # Set up the logger
 def setup_logger(context: str):
