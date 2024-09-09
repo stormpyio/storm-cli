@@ -5,6 +5,7 @@ from storm_cli.utils.logger import setup_logger
 app = typer.Typer()
 logger = setup_logger("Console")
 
+
 @app.command()
 def open():
     """
@@ -18,14 +19,19 @@ def open():
     # Attempt to open IPython if available, otherwise fall back to Python REPL
     try:
         from IPython import embed
+
         logger.info("Starting IPython shell...")
-        embed(colors='neutral')
+        embed(colors="neutral")
     except ImportError:
-        logger.warning("IPython is not installed. Falling back to the standard Python shell.")
+        logger.warning(
+            "IPython is not installed. Falling back to the standard Python shell."
+        )
         import code
+
         # Define any local context variables if needed
         local_context = {}
         code.interact(local=local_context)
+
 
 if __name__ == "__main__":
     app()

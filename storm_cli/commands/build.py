@@ -6,9 +6,13 @@ from storm_cli.utils.logger import setup_logger
 app = typer.Typer()
 logger = setup_logger("Build")
 
+
 @app.command()
 def build(
-    env: str = typer.Option("production", help="The environment to build for (e.g., production, staging, development)."),
+    env: str = typer.Option(
+        "production",
+        help="The environment to build for (e.g., production, staging, development).",
+    ),
     clean: bool = typer.Option(False, help="Clean previous builds before building."),
     optimize: bool = typer.Option(True, help="Optimize the build output."),
     docker: bool = typer.Option(False, help="Build a Docker image for deployment."),
@@ -52,6 +56,7 @@ def build(
             logger.error(f"Failed to build Docker image: {e}")
             raise typer.Exit(code=1)
 
+
 def clean_build():
     """
     Clean up previous build artifacts.
@@ -65,6 +70,7 @@ def clean_build():
     except subprocess.CalledProcessError as e:
         logger.error(f"Error cleaning build artifacts: {e}")
 
+
 def pre_build_tasks(env: str):
     """
     Run tasks required before the build, such as compiling assets or running migrations.
@@ -75,12 +81,15 @@ def pre_build_tasks(env: str):
     try:
         # Example: Compile TypeScript, run asset-related tasks, or migrations
         if env == "production":
-            subprocess.run(["echo", "Running production-specific pre-build tasks..."], check=True)
+            subprocess.run(
+                ["echo", "Running production-specific pre-build tasks..."], check=True
+            )
         else:
             subprocess.run(["echo", "Running pre-build tasks for", env], check=True)
     except subprocess.CalledProcessError as e:
         logger.error(f"Error in pre-build tasks: {e}")
         raise typer.Exit(code=1)
+
 
 def build_application(env: str, optimize: bool):
     """
@@ -101,6 +110,7 @@ def build_application(env: str, optimize: bool):
         logger.error(f"Error building the application: {e}")
         raise typer.Exit(code=1)
 
+
 def build_docker_image(env: str):
     """
     Build a Docker image for the application.
@@ -109,13 +119,12 @@ def build_docker_image(env: str):
     :return: None
     """
     try:
-        docker_command = [
-            "docker", "build", "-t", f"storm_app:{env}", "."
-        ]
+        docker_command = ["docker", "build", "-t", f"storm_app:{env}", "."]
         subprocess.run(docker_command, check=True)
     except subprocess.CalledProcessError as e:
         logger.error(f"Error building Docker image: {e}")
         raise typer.Exit(code=1)
+
 
 if __name__ == "__main__":
     app()

@@ -5,12 +5,17 @@ from storm_cli.utils.logger import setup_logger
 app = typer.Typer()
 logger = setup_logger("Test")
 
+
 @app.command()
 def test(
-    path: str = typer.Argument(None, help="Path to the test file or directory to run (default: all tests)."),
+    path: str = typer.Argument(
+        None, help="Path to the test file or directory to run (default: all tests)."
+    ),
     coverage: bool = typer.Option(False, help="Run tests with coverage report."),
     verbose: bool = typer.Option(False, help="Run tests in verbose mode."),
-    failed: bool = typer.Option(False, help="Run only the tests that failed last time."),
+    failed: bool = typer.Option(
+        False, help="Run only the tests that failed last time."
+    ),
 ):
     """
     Run tests for the Storm application.
@@ -30,7 +35,11 @@ def test(
 
     # Add options for coverage, verbosity, and rerunning failed tests
     if coverage:
-        test_command = ["pytest", "--cov", path or "."]  # Ensure coverage applies to the correct path
+        test_command = [
+            "pytest",
+            "--cov",
+            path or ".",
+        ]  # Ensure coverage applies to the correct path
     if verbose:
         test_command.append("-v")
     if failed:
@@ -44,6 +53,7 @@ def test(
     except subprocess.CalledProcessError as e:
         logger.error(f"Test run failed: {e}")
         raise typer.Exit(code=1)
+
 
 if __name__ == "__main__":
     app()
