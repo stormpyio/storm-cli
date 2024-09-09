@@ -12,6 +12,7 @@ from storm_cli.commands import (
     test,
     console,
     serve,
+    deploy
 )
 
 app = typer.Typer(
@@ -35,10 +36,9 @@ app.command()(build.build)
 app.command()(new.new)
 app.command()(test.test)
 app.command()(start.start)
+app.command()(deploy.deploy)
 
 # Version and Help options
-
-
 @app.callback()
 def main(
     version: bool = typer.Option(
