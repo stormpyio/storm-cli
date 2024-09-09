@@ -1,5 +1,5 @@
 import typer
-from storm_cli.commands import new, generate, build, start, info, add, lint, new, config
+from storm_cli.commands import new, generate, build, start, info, add, lint, new, config, test
 
 app = typer.Typer(
     help="Storm CLI - A command-line tool for managing Storm applications."
@@ -24,6 +24,7 @@ app.command()(info.info)
 app.command()(lint.lint)
 app.command()(build.build)
 app.command()(new.new)
+app.command()(test.test)
 
 # Version and Help options
 @app.callback()
