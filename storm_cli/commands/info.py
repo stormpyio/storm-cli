@@ -2,7 +2,7 @@ import typer
 from storm_cli.utils.logger import setup_logger
 
 app = typer.Typer()
-logger = setup_logger("InfoCommand")
+logger = setup_logger("Info")
 
 
 @app.command()

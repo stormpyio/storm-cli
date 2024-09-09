@@ -1,5 +1,5 @@
 import typer
-from storm_cli.commands import new, generate, build, start, info, add, lint
+from storm_cli.commands import new, generate, build, start, info, add, lint, new, config
 
 app = typer.Typer(
     help="Storm CLI - A command-line tool for managing Storm applications."
@@ -11,18 +11,19 @@ app.add_typer(
     name="new",
     help="Generate a new Storm application.",
 )
-app.add_typer(build.app, name="build", help="Build a Storm application.")
 app.add_typer(start.app, name="start", help="Run a Storm application.")
 app.add_typer(info.app, help="Display Storm project details.")
 app.add_typer(
     add.app, name="add", help="Add support for an external library to your project."
 )
 app.add_typer(generate.app, name="generate", help="Generate a Storm element.")
+app.add_typer(config.app, name="config", help="Configure Storm CLI settings.")
 
 # Register commands
 app.command()(info.info)
 app.command()(lint.lint)
-
+app.command()(build.build)
+app.command()(new.new)
 
 # Version and Help options
 @app.callback()
