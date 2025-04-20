@@ -1,3 +1,0 @@
-name:
-  type: str
-  help: "Name of the controller"
