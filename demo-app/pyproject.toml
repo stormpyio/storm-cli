@@ -1,0 +1,11 @@
+[project]
+name = "demo-app"
+version = "0.1.0"
+description = "A new Storm project"
+authors = [{ name = "Author", email = "you@example.com" }]
+requires-python = ">=3.9"
+dependencies = ["strom-framework", "uvicorn"]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
